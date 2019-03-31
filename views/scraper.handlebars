@@ -1,0 +1,27 @@
+<div class="jumbotron">
+  <h1 class="display-4">NPR Scraper</h1>
+  <p class="lead">Scrape articles from The Coloradoan.</p>
+  <hr class="my-4">
+  <p>Press to Scrape articles.</p>
+  <a class="btn btn-primary btn-lg" id="scrape" href="/scrape">Scrape Now!</a>
+</div>
+
+{{#if article}}
+{{#each article}}
+<div class="card">
+  <a href="{{link}}" target="_blank">
+    <div class="card-body">
+      <h5 class="card-title">{{title}}</h5>
+      <a href="#" class="btn btn-primary">Favorite</a>
+    </div>
+  </a>
+</div>
+{{/each}}
+{{else }}
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">There aren't any articles yet.  Scrape first!</h5>
+      <a href="/scrape" class="btn btn-primary">Scrape Now!</a>
+    </div>
+</div>
+{{/if}}
