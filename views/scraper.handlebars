@@ -6,16 +6,19 @@
   <a class="btn btn-primary btn-lg" id="scrape" href="/scrape">Scrape Now!</a>
 </div>
 
+<div id="article-box">
 {{#if article}}
 {{#each article}}
+{{#unless isFavorite}}
 <div class="card">
-  <a href="{{link}}" target="_blank">
     <div class="card-body">
+      <a href="{{link}}" target="_blank">
       <h5 class="card-title">{{title}}</h5>
-      <a href="#" class="btn btn-primary">Favorite</a>
+      </a>
+      <button data-id={{_id}} class="btn btn-primary favorite">Favorite</button>
     </div>
-  </a>
 </div>
+{{/unless}}
 {{/each}}
 {{else }}
 <div class="card">
@@ -25,3 +28,4 @@
     </div>
 </div>
 {{/if}}
+</div>

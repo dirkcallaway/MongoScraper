@@ -22,7 +22,6 @@ app.use(express.urlencoded({
 app.use(express.json());
 //Static Folder
 app.use(express.static("public"));
-app.use(express.static(__dirname + "/app/public"));
 
 // Handlebars
 app.engine(
@@ -79,9 +78,25 @@ app.get("/scrape", function (req, res) {
         .catch((err) => console.log(err))
     });
     res.redirect("/");
-    
   });
 });
+
+app.put("/favorite/:id", function(req, res){
+  const id = req.params.id;
+  db.Article.findOneAndUpdate({
+    _id: id
+  },
+  {
+    isFavorite: true
+  })
+  .then(function(){
+    console.log("Favorite Added!")
+    res.reload();
+  })
+  .catch(function(err){
+    res.json(err)
+  })
+})
 
 // Listen on port 3000
 app.listen(3000, function () {
