@@ -72,6 +72,8 @@ app.get("/scrape", function (req, res) {
       //Finds the links in the articles
       result.link = "https://www.coloradoan.com" + $(element).find(".flm-asset-link").attr("href");
 
+      result.summary = $(element).find(".js-asset-description").text().trim();
+
       //Take the result object and create in MongoDB
       db.Article.create(result)
         .then((dbArticle) => console.log("Articles Added to Mongo."))
@@ -81,6 +83,7 @@ app.get("/scrape", function (req, res) {
   });
 });
 
+//Save a article
 app.put("/favorite/:id", function(req, res){
   const id = req.params.id;
   db.Article.findOneAndUpdate({
@@ -97,6 +100,39 @@ app.put("/favorite/:id", function(req, res){
     res.json(err)
   })
 })
+
+//Remove a Saved a article
+app.put("/remove/:id", function(req, res){
+  const id = req.params.id;
+  db.Article.findOneAndUpdate({
+    _id: id
+  },
+  {
+    isFavorite: false
+  })
+  .then(function(){
+    console.log("Favorite Removed!")
+    res.reload();
+  })
+  .catch(function(err){
+    res.json(err)
+  })
+})
+
+//Saved Articles
+app.get("/saved", (req, res) => {
+  db.Article.find({})
+  .then(function(dbArticle){
+    let hbsobj;
+    hbsobj = {
+      article: dbArticle
+    };
+    res.render("saved", hbsobj);
+  })
+  .catch(function(err){
+    res.json(err);
+  })
+});
 
 // Listen on port 3000
 app.listen(3000, function () {

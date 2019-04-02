@@ -1,31 +1,33 @@
-<div class="jumbotron">
-  <h1 class="display-4">NPR Scraper</h1>
-  <p class="lead">Scrape articles from The Coloradoan.</p>
-  <hr class="my-4">
-  <p>Press to Scrape articles.</p>
-  <a class="btn btn-primary btn-lg" id="scrape" href="/scrape">Scrape Now!</a>
+<div class="jumbotron jumbotron-fluid mb-0">
+  <div class="container">
+    <h1 class="display-4">Scrape. Save. Read.</h1>
+    <p class="lead">News articles from the Choice City.</p>
+    <a class="btn btn-block btn-success" href="/scrape" role="button">Scrape Now</a>
+  </div>
 </div>
 
 <div id="article-box">
-{{#if article}}
-{{#each article}}
-{{#unless isFavorite}}
-<div class="card">
-    <div class="card-body">
-      <a href="{{link}}" target="_blank">
-      <h5 class="card-title">{{title}}</h5>
-      </a>
-      <button data-id={{_id}} class="btn btn-primary favorite">Favorite</button>
+  <div class="container">
+    {{#if article}}
+    {{#each article}}
+    {{#unless isFavorite}}
+    <div class="card">
+      <div class="card-body">
+        <a href="{{link}}" target="_blank">
+          <h5 class="card-title">{{title}}</h5>
+        </a>
+        <button data-id={{_id}} class="btn btn-primary favorite">Favorite</button>
+      </div>
     </div>
-</div>
-{{/unless}}
-{{/each}}
-{{else }}
-<div class="card">
-    <div class="card-body">
-      <h5 class="card-title">There aren't any articles yet.  Scrape first!</h5>
-      <a href="/scrape" class="btn btn-primary">Scrape Now!</a>
+    {{/unless}}
+    {{/each}}
+    {{else }}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">There aren't any articles yet. Scrape first!</h5>
+        <a href="/scrape" class="btn btn-primary">Scrape Now!</a>
+      </div>
     </div>
-</div>
-{{/if}}
+    {{/if}}
+  </div>
 </div>

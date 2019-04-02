@@ -1,0 +1,11 @@
+.jumbotron {
+  background-color: #006064;
+}
+
+.navbar-custom {
+  background-color: #00363a;
+}
+
+#article-box {
+  background-image: url(/images/bg.jpg)
+}

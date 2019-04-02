@@ -1,16 +1,16 @@
-<div class="jumbotron">
-  <h1 class="display-4">NPR Scraper</h1>
-  <p class="lead">Scrape articles from The Coloradoan.</p>
-  <hr class="my-4">
-  <p>Press to Scrape articles.</p>
-  <a class="btn btn-primary btn-lg" id="scrape" href="/scrape">Scrape Now!</a>
+<div class="jumbotron jumbotron-fluid mb-0">
+  <div class="container">
+    <h1 class="display-4">Scrape. Save. Read.</h1>
+    <p class="lead">News articles from the Choice City.</p>
+  </div>
 </div>
 
-<div class="container">
+<div class="container" id="saved-articles">
   <div class=row>
     <div class="col-12">
-      {{#if isCompleted}}
+
       {{#each article}}
+      {{#if isFavorite}}
       <div class="card">
         <div class="card-header text-white bg-primary">
           <a href={{link}} target="_blank" class="text-white">
@@ -18,22 +18,13 @@
           </a>
         </div>
         <div class="card-body">
-          <button data="{{_id}}" class="btn btn-info note-btn">Article Notes</button>
-          <button data="{{_id}}" class="btn btn-danger delete-saved">Remove From Saved</button>
-        </div>
-      </div>
-      {{/each}}
-      {{else}}
-      <div class="card">
-        <div class="card-header text-white bg-primary">
-            <h2>You have no favorite articles.</h2>
-        </div>
-        <div class="card-body">
-          <p>Try adding some articles to your favorites first.</p>
-          <a href="/" class="btn btn-primary">Home</a>
+          <p>{{summary}}</p>
+          <button data-id="{{_id}}" class="btn btn-info note-btn">Article Notes</button>
+          <button data-id="{{_id}}" id="delete-saved" class="btn btn-danger delete-saved">Remove From Saved</button>
         </div>
       </div>
       {{/if}}
+      {{/each}}
     </div>
   </div>
 </div>

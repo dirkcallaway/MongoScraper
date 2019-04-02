@@ -20,4 +20,14 @@ $("#article-box").on('click','button',function() {
   })
 });
 
+$("#saved-articles").on('click','#delete-saved',function() {
+  console.log("Delete Article")
+  const id = $(this).attr("data-id");
+  $.ajax(`/remove/${id}`, {
+      type: "PUT"
+  }).then(function(){
+      location.reload();
+  })
+});
+
 });
