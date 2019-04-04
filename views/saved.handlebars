@@ -9,21 +9,21 @@
   <div class=row>
     <div class="col-12">
 
-      {{#each article}}
-      {{#if isFavorite}}
-      <div class="card">
-        <div class="card-header text-white bg-primary">
-          <a href={{link}} target="_blank" class="text-white">
-            <h2>{{title}}</h2>
-          </a>
+      {{#each articles}}
+        {{#if isFavorite}}
+        <div class="card">
+          <div class="card-header text-white bg-primary">
+            <a href={{link}} target="_blank" class="text-white">
+              <h2>{{title}}</h2>
+            </a>
+          </div>
+          <div class="card-body">
+            <p>{{summary}}</p>
+            <button id="article-notes" data-id="{{_id}}" class="btn btn-info">Article Notes</button>
+            <button data-id="{{_id}}" id="delete-saved" class="btn btn-danger delete-saved">Remove From Saved</button>
+          </div>
         </div>
-        <div class="card-body">
-          <p>{{summary}}</p>
-          <button id="article-notes" data-id="{{_id}}" class="btn btn-info">Article Notes</button>
-          <button data-id="{{_id}}" id="delete-saved" class="btn btn-danger delete-saved">Remove From Saved</button>
-        </div>
-      </div>
-      {{/if}}
+        {{/if}}
       {{/each}}
     </div>
   </div>

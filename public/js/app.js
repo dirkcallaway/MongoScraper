@@ -30,8 +30,14 @@ $("#saved-articles").on('click','#article-notes',function() {
   $("#save-note").attr("data-id", id);
   $.ajax(`/notes/${id}`, {
       type: "GET"
-  }).then(function(){
-      location.reload();
+  }).then(function(noteBody){
+    console.log(`Look Here: ${noteBody}`)
+      $(".saved-notes").empty();
+      let articleNotes = noteBody;
+      for(var i = 0; i < noteBody.length; i++){
+        let noteListItem = $("<li>").addClass("list-group-item").text(noteBody[i].body);
+        $(".saved-notes").append(noteListItem);
+      }
   })
 });
 
@@ -39,14 +45,15 @@ $("#saved-articles").on('click','#article-notes',function() {
 $(".modal-footer").on('click','#save-note',function() {
   console.log("Save Notes")
   const id = $(this).attr("data-id");
+  $('#note-modal').modal('toggle')
   let note = {
     noteBody: $("#note-body").val()
   }
   $.ajax(`/notes/${id}`, {
       type: "POST",
       data: note
-  }).then(function(){
-      // location.reload();
+  }).then(function(notesDB){
+      console.log(notesDB)
       $("#note-body").val("")
   })
 });
